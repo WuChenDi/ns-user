@@ -1,0 +1,127 @@
+extends layout
+
+block content
+  h1 OAuth 2.0 Client Management
+  p Manage OAuth 2.0 clients for your application.
+
+  // Display OAuth client list
+  if clients && clients.length
+    table(border="1")
+      thead
+        tr
+          th Client ID
+          th Client Name
+          th Scopes
+          th Redirect URIs
+          th Actions
+      tbody
+        each client in clients
+          tr
+            td= client.client_id
+            td= client.client_name || 'N/A'
+            td= client.scope || 'N/A'
+            td
+              if client.redirect_uris
+                each uri in client.redirect_uris
+                  div= uri
+              else
+                | N/A
+            td
+              button(type="button", onclick=`deleteClient('${client.client_id}', '${csrfToken}')`) Delete
+
+  // Create new client form
+  h2 Create New Client
+  form(action="/admin/oauth/create", method="POST")
+    input(type="hidden", name="_csrf", value=csrfToken)
+    table
+      tr
+        td
+          label(for="client_id") Client ID
+        td
+          input(type="text", id="client_id", name="client_id", required)
+      tr
+        td
+          label(for="client_name") Client Name
+        td
+          input(type="text", id="client_name", name="client_name")
+      tr
+        td
+          label(for="client_secret") Client Secret
+        td
+          input(type="text", id="client_secret", name="client_secret")
+      tr
+        td
+          label(for="redirect_uris") Redirect URIs (comma-separated)
+        td
+          input(type="text", id="redirect_uris", name="redirect_uris")
+      tr
+        td
+          label(for="scope") Scopes
+        td
+          input(type="text", id="scope", name="scope", value="openid offline")
+      tr
+        td
+          label(for="grant_types") Grant Types
+        td
+          input(type="text", id="grant_types", name="grant_types", value="authorization_code,refresh_token")
+    input(type="submit", value="Create Client")
+
+  // Update client form
+  h2 Update Client
+  form(action="/admin/oauth/update", method="POST")
+    input(type="hidden", name="_csrf", value=csrfToken)
+    table
+      tr
+        td
+          label(for="update_client_id") Client ID
+        td
+          input(type="text", id="update_client_id", name="client_id", required)
+      tr
+        td
+          label(for="update_client_name") Client Name
+        td
+          input(type="text", id="update_client_name", name="client_name")
+      tr
+        td
+          label(for="update_client_secret") Client Secret
+        td
+          input(type="text", id="update_client_secret", name="client_secret")
+      tr
+        td
+          label(for="update_redirect_uris") Redirect URIs (comma-separated)
+        td
+          input(type="text", id="update_redirect_uris", name="redirect_uris")
+      tr
+        td
+          label(for="update_scope") Scopes
+        td
+          input(type="text", id="update_scope", name="scope")
+      tr
+        td
+          label(for="update_grant_types") Grant Types
+        td
+          input(type="text", id="update_grant_types", name="grant_types")
+    input(type="submit", value="Update Client")
+
+  script.
+    async function deleteClient(clientId, csrfToken) {
+      try {
+        const response = await fetch('/admin/oauth/delete', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-Token': csrfToken
+          },
+          body: JSON.stringify({ client_id: clientId })
+        });
+        const result = await response.json();
+        if (response.ok) {
+          alert(result.message || 'Client deleted successfully');
+          window.location.reload(); // Refresh to update client list
+        } else {
+          alert(result.error || 'Failed to delete client');
+        }
+      } catch (error) {
+        alert('Error: ' + error.message);
+      }
+    }

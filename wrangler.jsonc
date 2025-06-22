@@ -1,0 +1,46 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "my-app",
+  "main": "app/index.ts",
+  "compatibility_date": "2025-06-22",
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "vars": {
+    "DB_TYPE": "d1",
+    // Email Configuration (Resend)
+    "RESEND_API_KEY": "re_8HhZfpjp_4JRa9XEu4ec9f5dxSip3TEhz",
+    "RESEND_FROM_EMAIL": "noreply@resend.dev",
+    // Turnstile Configuration
+    "TURNSTILE_SITE_KEY": "1x00000000000000000000AA",
+    "TURNSTILE_SECRET_KEY": "1x0000000000000000000000000000000AA",
+    "MY_VAR": "my-variable"
+  },
+  // "kv_namespaces": [
+  //   {
+  //     "binding": "MY_KV_NAMESPACE",
+  //     "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  //   }
+  // ],
+  // "r2_buckets": [
+  //   {
+  //     "binding": "MY_BUCKET",
+  //     "bucket_name": "my-bucket"
+  //   }
+  // ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "nsiod-user",
+      "database_id": "70c43167-07a2-44f2-bec0-2792762e5f88",
+      "migrations_dir": "app/database"
+    }
+  ],
+  // "ai": {
+  //   "binding": "AI"
+  // },
+  "observability": {
+    "enabled": true,
+    "head_sampling_rate": 1
+  }
+}
