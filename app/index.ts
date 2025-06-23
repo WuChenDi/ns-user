@@ -22,12 +22,13 @@ export const customLogger = (message: string, ...rest: string[]) => {
   console.log(message, ...rest);
 };
 
-type Bindings = {
-  MY_KV: KVNamespace
-  DB: D1Database
-}
+// type Bindings = {
+//   MY_KV: KVNamespace
+//   DB: D1Database
+// }
 
-const app = new Hono<{ Bindings: Bindings }>();
+// const app = new Hono<{ Bindings: Bindings }>();
+const app = new Hono();
 
 app.use(accesslog(customLogger));
 

@@ -43,24 +43,15 @@ const config =
     ? {
         dialect: 'turso',
         dbCredentials: libsql,
-      }
+      } as const
     : {
         dialect: 'sqlite',
         driver: 'd1-http',
         dbCredentials: d1,
-      }
+      } as const
 
-// @ts-ignore
 export default defineConfig({
   schema: './app/database/schema.ts',
   out: './app/database',
   ...config,
 })
-
-// export default defineConfig({
-//   schema: './app/database/schema.ts',
-//   out: './app/database',
-//   dialect: 'sqlite',
-//   // driver,
-//   dbCredentials
-// })

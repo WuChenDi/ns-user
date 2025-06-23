@@ -3,6 +3,7 @@
 DIRS_TO_DELETE=(
   "node_modules"
   ".wrangler"
+  "logs"
 )
 
 echo "Start cleaning up directories: ${DIRS_TO_DELETE[*]}"
