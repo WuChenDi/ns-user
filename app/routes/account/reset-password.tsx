@@ -4,6 +4,7 @@ import { users, passwordResetTokens } from '@/database/schema';
 import { eq } from 'drizzle-orm';
 import { hashPasswordFn, withNotDeleted, softDelete } from '@/utils';
 import dayjs from 'dayjs';
+import { ResetPasswordPage } from '@/components/ResetPasswordPage';
 
 export const resetPasswordRoute = new Hono();
 
@@ -13,11 +14,10 @@ resetPasswordRoute.get('/', async (c) => {
   
   if (!token) {
     return c.html(
-      render('app/view/reset-password.pug', {
-        title: 'Reset Password',
-        error: 'Invalid reset link.',
-        token: null,
-      })
+      <ResetPasswordPage
+        title="Reset Password"
+        error="Invalid reset link."
+      />
     );
   }
 
@@ -28,11 +28,10 @@ resetPasswordRoute.get('/', async (c) => {
 
     if (!resetToken) {
       return c.html(
-        render('app/view/reset-password.pug', {
-          title: 'Reset Password',
-          error: 'Invalid or expired reset link.',
-          token: null,
-        })
+        <ResetPasswordPage
+          title="Reset Password"
+          error="Invalid or expired reset link."
+        />
       );
     }
 
@@ -43,31 +42,29 @@ resetPasswordRoute.get('/', async (c) => {
         .where(eq(passwordResetTokens.token, token));
       
       return c.html(
-        render('app/view/reset-password.pug', {
-          title: 'Reset Password',
-          error: 'Reset link has expired. Please request a new one.',
-          token: null,
-        })
+        <ResetPasswordPage
+          title="Reset Password"
+          error="Reset link has expired. Please request a new one."
+        />
       );
     }
 
     return c.html(
-      render('app/view/reset-password.pug', {
-        title: 'Reset Password',
-        action: '/account/reset-password',
-        csrfToken: 'dummy-csrf-token',
-        token: token,
-      })
+      <ResetPasswordPage
+        title="Reset Password"
+        action="/account/reset-password"
+        csrfToken="dummy-csrf-token"
+        token={token}
+      />
     );
 
   } catch (error) {
     logger.error('Reset password validation error:', error);
     return c.html(
-      render('app/view/reset-password.pug', {
-        title: 'Reset Password',
-        error: 'An error occurred. Please try again.',
-        token: null,
-      })
+      <ResetPasswordPage
+        title="Reset Password"
+        error="An error occurred. Please try again."
+      />
     );
   }
 });
@@ -81,39 +78,39 @@ resetPasswordRoute.post('/', async (c) => {
 
   if (!token || !password || !confirmPassword) {
     return c.html(
-      render('app/view/reset-password.pug', {
-        title: 'Reset Password',
-        action: '/account/reset-password',
-        csrfToken: 'dummy-csrf-token',
-        error: 'All fields are required',
-        token: token || null,
-      }),
+      <ResetPasswordPage
+        title="Reset Password"
+        action="/account/reset-password"
+        csrfToken="dummy-csrf-token"
+        error="All fields are required"
+        token={token!}
+      />,
       400
     );
   }
 
   if (password !== confirmPassword) {
     return c.html(
-      render('app/view/reset-password.pug', {
-        title: 'Reset Password',
-        action: '/account/reset-password',
-        csrfToken: 'dummy-csrf-token',
-        error: 'Passwords do not match',
-        token: token,
-      }),
+      <ResetPasswordPage
+        title="Reset Password"
+        action="/account/reset-password"
+        csrfToken="dummy-csrf-token"
+        error="Passwords do not match"
+        token={token}
+      />,
       400
     );
   }
 
   if (password.length < 6) {
     return c.html(
-      render('app/view/reset-password.pug', {
-        title: 'Reset Password',
-        action: '/account/reset-password',
-        csrfToken: 'dummy-csrf-token',
-        error: 'Password must be at least 6 characters long',
-        token: token,
-      }),
+      <ResetPasswordPage
+        title="Reset Password"
+        action="/account/reset-password"
+        csrfToken="dummy-csrf-token"
+        error="Password must be at least 6 characters long"
+        token={token}
+      />,
       400
     );
   }
@@ -125,11 +122,10 @@ resetPasswordRoute.post('/', async (c) => {
 
     if (!resetToken) {
       return c.html(
-        render('app/view/reset-password.pug', {
-          title: 'Reset Password',
-          error: 'Invalid or expired reset link.',
-          token: null,
-        })
+        <ResetPasswordPage
+          title="Reset Password"
+          error="Invalid or expired reset link."
+        />
       );
     }
 
@@ -140,11 +136,10 @@ resetPasswordRoute.post('/', async (c) => {
         .where(eq(passwordResetTokens.token, token));
       
       return c.html(
-        render('app/view/reset-password.pug', {
-          title: 'Reset Password',
-          error: 'Reset link has expired. Please request a new one.',
-          token: null,
-        })
+        <ResetPasswordPage
+          title="Reset Password"
+          error="Reset link has expired. Please request a new one."
+        />
       );
     }
 
@@ -169,13 +164,13 @@ resetPasswordRoute.post('/', async (c) => {
   } catch (error) {
     logger.error('Password reset error:', error);
     return c.html(
-      render('app/view/reset-password.pug', {
-        title: 'Reset Password',
-        action: '/account/reset-password',
-        csrfToken: 'dummy-csrf-token',
-        error: 'An error occurred. Please try again.',
-        token: token,
-      }),
+      <ResetPasswordPage
+        title="Reset Password"
+        action="/account/reset-password"
+        csrfToken="dummy-csrf-token"
+        error="An error occurred. Please try again."
+        token={token}
+      />,
       500
     );
   }
