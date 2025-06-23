@@ -15,10 +15,13 @@ A modern user authentication system built with Hono.js, Drizzle ORM, and SQLite.
 
 - **Runtime**: Bun
 - **Framework**: Hono.js
-- **Database**: SQLite + Drizzle ORM
-- **Templates**: Pug
+- **ORM**: Drizzle ORM
+- **Database**: SQLite (with LibSQL or Cloudflare D1 support)
+- **Templating**: JSX/TSX
 - **Styling**: Tailwind CSS
-- **Email**: Resend
+- **Email Service**: Resend
+- **Logging**: Winston (with daily rotation for non-Cloudflare environments)
+- **Storage**: Unstorage for key-value persistence
 
 ## 🛠️ Quick Start
 
@@ -36,7 +39,6 @@ A modern user authentication system built with Hono.js, Drizzle ORM, and SQLite.
    ```bash
    bun run db:gen
    bun run db:push
-   bun run db:seed
    ```
 
 4. **Start server**
@@ -88,18 +90,28 @@ RESEND_FROM_EMAIL=noreply@resend.dev
 
 ## 📝 Routes
 
-- `/` - Homepage
-- `/account/login` - User login
-- `/account/register` - User registration
-- `/account/setting` - User settings
-- `/account/forgot-password` - Forgot password
-- `/admin` - Admin panel
+- `/` - Homepage with login and registration links
+- `/account/login` - User login with optional Turnstile verification
+- `/account/register` - User registration with username and password
+- `/account/setting` - User profile settings (username, email, nickname, phone)
+- `/account/forgot-password` - Password reset request form
+- `/account/reset-password` - Password reset with token validation
+- `/account/verify-email` - Email verification with token validation
+- `/account/logout` - Secure logout with session cleanup
+- `/admin/login` - Admin login with token-based authentication
+- `/admin` - Admin panel (requires authentication)
+- `/install` - Database seeding endpoint for initial setup
 
-## 🗄️ Database Tables
+## 🗄️ Database Schema
 
-- `users` - User basic information
-- `user_groups` - User role groups
-- `user_details` - Extended user details
-- `sessions` - User sessions
-- `email_verification_tokens` - Email verification tokens
-- `password_reset_tokens` - Password reset tokens
+The system uses the following SQLite tables managed by Drizzle ORM:
+
+- **`users`**: Stores core user data (username, email, password hash, user group)
+- **`user_groups`**: Defines roles (e.g., admin, user) with display names and descriptions
+- **`user_details`**: Extended user information (nickname, phone)
+- **`sessions`**: Manages user sessions with expiration and soft deletion
+- **`email_verification_tokens`**: Stores tokens for email verification (24-hour expiry)
+- **`password_reset_tokens`**: Stores tokens for password resets (1-hour expiry)
+- **`two_factor_tokens`**: Supports two-factor authentication (not fully implemented)
+
+All tables include `created_at`, `updated_at`, and `is_deleted` fields for tracking and soft deletion.
