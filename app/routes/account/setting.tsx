@@ -1,4 +1,3 @@
-// app/routes/account/setting.tsx
 import type { Context } from 'hono';
 import { Hono } from 'hono';
 import { getCookie } from 'hono/cookie'

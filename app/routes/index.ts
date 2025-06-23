@@ -1,4 +1,5 @@
 export * from './home'
+export * from './install'
 export * from './client'
 export * from './account'
 export * from './admin'

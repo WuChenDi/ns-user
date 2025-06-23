@@ -1,4 +1,3 @@
-// app/routes/account/forgot-password.tsx
 import { Hono } from 'hono';
 import { useDrizzle } from '@/db';
 import { users, passwordResetTokens } from '@/database/schema';

@@ -14,6 +14,7 @@
     // Turnstile Configuration
     "TURNSTILE_SITE_KEY": "1x00000000000000000000AA",
     "TURNSTILE_SECRET_KEY": "1x0000000000000000000000000000000AA",
+    "IM_MAIL_URL": "https://my-app.chendi.workers.dev",
     "MY_VAR": "my-variable"
   },
   // "kv_namespaces": [
@@ -32,7 +33,7 @@
     {
       "binding": "DB",
       "database_name": "nsiod-user",
-      "database_id": "70c43167-07a2-44f2-bec0-2792762e5f88",
+      "database_id": "e2e25b4d-2fef-424d-8d01-eafd50bba86f",
       "migrations_dir": "app/database"
     }
   ],

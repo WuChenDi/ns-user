@@ -1,4 +1,3 @@
-// app/routes/account/verify-email.tsx
 import { Hono } from 'hono';
 import { useDrizzle } from '@/db';
 import { users, emailVerificationTokens } from '@/database/schema';

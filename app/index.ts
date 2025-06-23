@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import '@/global';
 import {
   homeRoute,
+  installRoute,
   clientRoute,
   loginRoute,
   logoutRoute,
@@ -32,6 +33,7 @@ app.use(accesslog(customLogger));
 
 /* server */
 app.route('/', homeRoute);
+app.route('/install', installRoute);
 app.route('/client', clientRoute);
 app.route('/account/login', loginRoute);
 app.route('/account/logout', logoutRoute);

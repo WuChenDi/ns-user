@@ -1,4 +1,3 @@
-// app/routes/home.tsx
 import { Hono } from 'hono';
 import { getStorage } from '@/utils';
 import { HomePage } from '@/components/HomePage';

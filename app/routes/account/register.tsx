@@ -1,4 +1,3 @@
-// app/routes/account/register.tsx
 import { Hono } from 'hono';
 import { hashPasswordFn, withNotDeleted, DEFAULT_USER_GROUP_ID, verifyTurnstileToken, getClientIP } from '@/utils';
 import { useDrizzle } from '@/db';
