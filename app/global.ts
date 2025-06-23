@@ -1,5 +1,3 @@
-/* eslint-disable */
-
 import { createStorage } from 'unstorage'
 import * as winston from 'winston'
 import DailyRotateFile from 'winston-daily-rotate-file'

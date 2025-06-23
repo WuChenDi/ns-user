@@ -1,3 +1,8 @@
+/**
+ * Seed script to initialize user groups
+ * This script creates the default user groups: 'admin' and 'user'.
+ */
+
 import { Hono } from 'hono';
 import { userGroups } from '@/database/schema';
 import { useDrizzle } from '@/db';

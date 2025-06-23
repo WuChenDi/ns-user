@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "bun --hot app/index.ts",
     "start": "bun app/index.ts",
+    "clean": "bash ./scripts/clean.sh",
     "build": "bun build app/index.ts --target bun --outdir dist",
     "cf:dev": "wrangler dev --ip 0.0.0.0 --port 3000 app/index.ts",
     "cf:deploy": "wrangler deploy --minify",
@@ -13,7 +14,6 @@
     "cf:localdb": "wrangler d1 migrations apply nsiod-user",
     "cf:remotedb": "wrangler d1 migrations apply nsiod-user --remote",
     "db:studio": "drizzle-kit studio --port 3001 --host 0.0.0.0",
-    "db:seed": "bun app/database/seed-user-groups.ts",
     "db:pull": "drizzle-kit pull",
     "db:push": "drizzle-kit push",
     "db:gen": "drizzle-kit generate",
@@ -27,9 +27,8 @@
     "@libsql/client": "^0.15.9",
     "dayjs": "^1.11.13",
     "drizzle-orm": "^0.44.2",
-    "hono": "^4.7.10",
+    "hono": "^4.8.2",
     "nanoid": "^5.1.5",
-    "pug": "^3.0.3",
     "resend": "^4.6.0",
     "unstorage": "^1.16.0",
     "winston": "^3.17.0",
@@ -37,7 +36,6 @@
   },
   "devDependencies": {
     "@types/bun": "latest",
-    "@types/pug": "^2.0.10",
     "drizzle-kit": "^0.31.1",
     "wrangler": "^4.20.5"
   }

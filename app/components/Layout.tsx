@@ -1,11 +1,10 @@
-import type { FC } from 'hono/jsx';
+import type { FC, PropsWithChildren } from 'hono/jsx';
 
 interface LayoutProps {
   title?: string;
-  children?: any;
 }
 
-export const Layout: FC<LayoutProps> = ({ title = 'Auth System', children }) => {
+export const Layout: FC<PropsWithChildren<LayoutProps>> = ({ title = 'Auth System', children }) => {
   return (
     <html lang="en">
       <head>
