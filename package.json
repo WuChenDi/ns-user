@@ -1,8 +1,15 @@
 {
-  "name": "app",
-  "module": "index.ts",
+  "name": "ns-user",
   "type": "module",
+  "version": "0.0.1",
   "private": true,
+  "description": "A modern user authentication system built with Hono.js, Drizzle ORM, and SQLite.",
+  "author": "wudi",
+  "repository": {
+    "type": "http",
+    "url": "https://github.com/WuChenDi/ns-user.git"
+  },
+  "module": "app/index.ts",
   "scripts": {
     "dev": "bun --hot app/index.ts",
     "start": "bun app/index.ts",
@@ -11,8 +18,8 @@
     "cf:dev": "wrangler dev --ip 0.0.0.0 --port 3000 app/index.ts",
     "cf:deploy": "wrangler deploy --minify",
     "cf:typegen": "wrangler types --env-interface CloudflareBindings",
-    "cf:localdb": "wrangler d1 migrations apply nsiod-user",
-    "cf:remotedb": "wrangler d1 migrations apply nsiod-user --remote",
+    "cf:localdb": "wrangler d1 migrations apply ns-user",
+    "cf:remotedb": "wrangler d1 migrations apply ns-user --remote",
     "db:studio": "drizzle-kit studio --port 3001 --host 0.0.0.0",
     "db:pull": "drizzle-kit pull",
     "db:push": "drizzle-kit push",

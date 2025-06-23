@@ -17,7 +17,7 @@ export const HomePage: FC<HomePageProps> = ({
           </svg>
         </div>
         
-        <h1 class="text-3xl font-bold text-gray-900 mb-4">Welcome to Nsiod Auth System</h1>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">Welcome to Auth System</h1>
         <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
           A modern user authentication and consent flow implementation with email verification and password reset functionality.
         </p>

@@ -1,4 +1,4 @@
-# Nsiod Auth System
+# Auth System
 
 A modern user authentication system built with Hono.js, Drizzle ORM, and SQLite.
 
@@ -115,3 +115,7 @@ The system uses the following SQLite tables managed by Drizzle ORM:
 - **`two_factor_tokens`**: Supports two-factor authentication (not fully implemented)
 
 All tables include `created_at`, `updated_at`, and `is_deleted` fields for tracking and soft deletion.
+
+## License
+
+[MIT](./LICENSE) License © 2025-PRESENT [wudi](https://github.com/WuChenDi)

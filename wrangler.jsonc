@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "my-app",
+  "name": "ns-user",
   "main": "app/index.ts",
   "compatibility_date": "2025-06-22",
   "compatibility_flags": [
@@ -14,12 +14,12 @@
     // Turnstile Configuration
     "TURNSTILE_SITE_KEY": "1x00000000000000000000AA",
     "TURNSTILE_SECRET_KEY": "1x0000000000000000000000000000000AA",
-    "IM_MAIL_URL": "https://my-app.chendi.workers.dev",
+    "IM_MAIL_URL": "https://ns-user.chendi.workers.dev",
   },
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "nsiod-user",
+      "database_name": "ns-user",
       "database_id": "e2e25b4d-2fef-424d-8d01-eafd50bba86f",
       "migrations_dir": "app/database"
     }
