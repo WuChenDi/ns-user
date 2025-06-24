@@ -43,7 +43,7 @@ export const Layout: FC<PropsWithChildren<LayoutProps>> = ({ title = 'Auth Syste
           </header>
           
           <main class="flex-1 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-            <div class="max-w-md w-full space-y-8">
+            <div class="w-full space-y-8">
               {children}
             </div>
           </main>

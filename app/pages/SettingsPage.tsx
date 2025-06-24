@@ -88,6 +88,19 @@ export const SettingsPage: FC<SettingsPageProps> = ({
             <p class="text-xs text-gray-500 mt-1">Your account type and permissions level</p>
           </div>
           
+          {userGroup === 'Administrator' && (
+            <div>
+              <label class="block text-sm font-medium text-gray-700 mb-2">Admin Panel</label>
+              <a
+                href="/admin"
+                class="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-lg text-blue-600 hover:bg-gray-50 transition-colors"
+              >
+                Manage Users
+              </a>
+              <p class="text-xs text-gray-500 mt-1">Access user management and permissions</p>
+            </div>
+          )}
+          
           <div>
             <label class="block text-sm font-medium text-gray-700 mb-2" for="email">Email</label>
             <div class="relative">
