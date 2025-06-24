@@ -14,7 +14,7 @@ export const VerifyEmailPage: FC<VerifyEmailPageProps> = ({
 }) => {
   return (
     <Layout title={title}>
-      <div class="text-center py-8">
+      <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl mx-auto">
         {success ? (
           <>
             <div class="mx-auto h-20 w-20 flex items-center justify-center rounded-full bg-green-100 mb-6">

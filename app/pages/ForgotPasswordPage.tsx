@@ -18,7 +18,7 @@ export const ForgotPasswordPage: FC<ForgotPasswordPageProps> = ({
 }) => {
   return (
     <Layout title={title}>
-      <div class="bg-white shadow-lg rounded-lg p-8">
+      <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl mx-auto">
         <div class="text-center mb-8">
           <div class="mx-auto h-12 w-12 flex items-center justify-center rounded-full bg-yellow-100 mb-4">
             <svg class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
