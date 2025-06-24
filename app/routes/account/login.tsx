@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 import { eq, or } from 'drizzle-orm';
 import { getCookie, setCookie } from 'hono/cookie';
 import dayjs from 'dayjs';
-import { LoginPage } from '@/components/LoginPage';
+import { LoginPage } from '@/pages/LoginPage';
 
 export const loginRoute = new Hono();
 

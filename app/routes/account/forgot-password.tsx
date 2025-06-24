@@ -6,7 +6,7 @@ import { sendEmail, generatePasswordResetTemplate, withNotDeleted, softDelete } 
 import { nanoid } from 'nanoid';
 import dayjs from 'dayjs';
 import { mailUrl } from '@/config';
-import { ForgotPasswordPage } from '@/components/ForgotPasswordPage';
+import { ForgotPasswordPage } from '@/pages/ForgotPasswordPage';
 
 export const forgotPasswordRoute = new Hono();
 

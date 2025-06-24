@@ -4,7 +4,7 @@ import { users, passwordResetTokens } from '@/database/schema';
 import { eq } from 'drizzle-orm';
 import { hashPasswordFn, withNotDeleted, softDelete } from '@/utils';
 import dayjs from 'dayjs';
-import { ResetPasswordPage } from '@/components/ResetPasswordPage';
+import { ResetPasswordPage } from '@/pages/ResetPasswordPage';
 
 export const resetPasswordRoute = new Hono();
 

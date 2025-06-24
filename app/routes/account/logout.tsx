@@ -6,7 +6,7 @@ import { sessions } from '@/database/schema';
 import { eq } from 'drizzle-orm';
 import { withNotDeleted, softDelete } from '@/utils';
 import dayjs from 'dayjs';
-import { LogoutSuccessPage } from '@/components/LogoutSuccessPage';
+import { LogoutSuccessPage } from '@/pages/LogoutSuccessPage';
 
 type Variables = {
   userId: number;

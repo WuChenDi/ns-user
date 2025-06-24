@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import { getStorage } from '@/utils';
-import { HomePage } from '@/components/HomePage';
+import { HomePage } from '@/pages/HomePage';
 
 export const homeRoute = new Hono();
 

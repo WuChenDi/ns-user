@@ -8,7 +8,7 @@ import { sendEmail, generateEmailVerificationTemplate, withNotDeleted, softDelet
 import { nanoid } from 'nanoid';
 import dayjs from 'dayjs';
 import { mailUrl } from '@/config';
-import { SettingsPage } from '@/components/SettingsPage';
+import { SettingsPage } from '@/pages/SettingsPage';
 
 type Variables = {
   userId: number

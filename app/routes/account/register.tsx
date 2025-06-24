@@ -3,7 +3,7 @@ import { hashPasswordFn, withNotDeleted, DEFAULT_USER_GROUP_ID, verifyTurnstileT
 import { useDrizzle } from '@/db';
 import { users } from '@/database/schema';
 import { eq } from 'drizzle-orm';
-import { RegisterPage } from '@/components/RegisterPage';
+import { RegisterPage } from '@/pages/RegisterPage';
 
 export const registerRoute = new Hono();
 

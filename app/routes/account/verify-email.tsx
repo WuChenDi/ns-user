@@ -4,7 +4,7 @@ import { users, emailVerificationTokens } from '@/database/schema';
 import { eq } from 'drizzle-orm';
 import { withNotDeleted, softDelete } from '@/utils';
 import dayjs from 'dayjs';
-import { VerifyEmailPage } from '@/components/VerifyEmailPage';
+import { VerifyEmailPage } from '@/pages/VerifyEmailPage';
 
 export const verifyEmailRoute = new Hono();
 

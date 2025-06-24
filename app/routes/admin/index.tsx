@@ -1,7 +1,7 @@
 // app/routes/admin/index.tsx
 import { Hono } from 'hono';
 import { serverName } from '@/config';
-import { AdminLoginPage } from '@/components/AdminLoginPage';
+import { AdminLoginPage } from '@/pages/AdminLoginPage';
 
 export const adminRoute = new Hono();
 

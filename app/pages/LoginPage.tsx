@@ -1,52 +1,71 @@
 import type { FC } from 'hono/jsx';
-import { Layout } from './Layout';
+import { Layout } from '@/components/Layout';
 
-interface RegisterPageProps {
+interface LoginPageProps {
   title?: string;
   action?: string;
   csrfToken?: string;
+  success?: string;
   error?: string;
+  identifier?: string;
+  showRegisterLink?: boolean;
   turnstileSiteKey?: string;
 }
 
-export const RegisterPage: FC<RegisterPageProps> = ({
-  title = 'Register',
-  action = '/account/register',
+export const LoginPage: FC<LoginPageProps> = ({
+  title = 'Login',
+  action = '/account/login',
   csrfToken = '',
+  success,
   error,
+  identifier = '',
+  showRegisterLink = false,
   turnstileSiteKey
 }) => {
   return (
     <Layout title={title}>
       <div class="bg-white shadow-lg rounded-lg p-8">
         <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold text-gray-900">Create your account</h2>
-          <p class="text-gray-600 mt-2">Join us today and get started</p>
+          <h2 class="text-2xl font-bold text-gray-900">Sign in to your account</h2>
+          <p class="text-gray-600 mt-2">Please enter your credentials below</p>
         </div>
+        
+        {success && (
+          <div class="bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
+            <span class="text-green-800 font-medium">{success}</span>
+          </div>
+        )}
         
         {error && (
           <div class="bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
             <span class="text-red-800 font-medium">{error}</span>
+            {showRegisterLink && (
+              <div class="mt-2">
+                <a class="text-blue-600 hover:text-blue-500 font-medium" href="/account/register">
+                  Click here to register
+                </a>
+              </div>
+            )}
           </div>
         )}
         
-        <form class="space-y-6" action={action} method="POST" id="registerForm">
+        <form class="space-y-6" action={action} method="POST" id="loginForm">
           <input type="hidden" name="_csrf" value={csrfToken} />
           
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1" for="username">
-              Username
+            <label class="block text-sm font-medium text-gray-700 mb-1" for="identifier">
+              Username or Email
             </label>
             <input 
               class="block w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500" 
               type="text" 
-              id="username" 
-              name="username" 
-              placeholder="Choose a username" 
+              id="identifier" 
+              name="identifier" 
+              placeholder="Enter your username or email" 
+              value={identifier} 
               required 
               autocomplete="username"
             />
-            <p class="text-xs text-gray-500 mt-1">This will be your unique identifier</p>
           </div>
           
           <div>
@@ -58,19 +77,30 @@ export const RegisterPage: FC<RegisterPageProps> = ({
               type="password" 
               id="password" 
               name="password" 
-              placeholder="Create a secure password" 
+              placeholder="Enter your password" 
               required 
               minlength="6" 
-              autocomplete="new-password"
+              autocomplete="current-password"
             />
-            <p class="text-xs text-gray-500 mt-1">Must be at least 6 characters long</p>
           </div>
           
-          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 class="text-sm font-medium text-blue-800">Registration Info</h4>
-            <p class="text-sm text-blue-700 mt-1">
-              You can add your email address later in settings to enable password reset and other features.
-            </p>
+          <div class="flex items-center justify-between">
+            <div class="flex items-center">
+              <input 
+                class="h-4 w-4 text-blue-600 border-gray-300 rounded" 
+                type="checkbox" 
+                id="remember" 
+                name="remember" 
+                value="1"
+              />
+              <label class="ml-2 block text-sm text-gray-700" for="remember">
+                Remember me
+              </label>
+            </div>
+            
+            <a class="text-sm text-blue-600 hover:text-blue-500 font-medium" href="/account/forgot-password">
+              Forgot your password?
+            </a>
           </div>
           
           {turnstileSiteKey && (
@@ -78,18 +108,18 @@ export const RegisterPage: FC<RegisterPageProps> = ({
           )}
           
           <button 
-            class="w-full px-4 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-green-600 hover:bg-green-700 focus:ring-2 focus:ring-green-500" 
+            class="w-full px-4 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500" 
             type="submit" 
             id="submitBtn"
           >
-            Create Account
+            Sign in
           </button>
         </form>
         
         <div class="mt-6 text-center">
-          <span class="text-gray-600">Already have an account? </span>
-          <a class="ml-1 text-blue-600 hover:text-blue-500 font-medium" href="/account/login">
-            Sign in here
+          <span class="text-gray-600">Don't have an account? </span>
+          <a class="ml-1 text-blue-600 hover:text-blue-500 font-medium" href="/account/register">
+            Register here
           </a>
         </div>
       </div>
@@ -100,7 +130,7 @@ export const RegisterPage: FC<RegisterPageProps> = ({
           <script dangerouslySetInnerHTML={{
             __html: `
               document.addEventListener('DOMContentLoaded', function() {
-                const form = document.getElementById('registerForm');
+                const form = document.getElementById('loginForm');
                 if (typeof turnstile !== 'undefined') {
                   form.addEventListener('submit', function(e) {
                     const turnstileResponse = document.querySelector('input[name="cf-turnstile-response"]');
