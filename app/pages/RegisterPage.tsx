@@ -18,7 +18,7 @@ export const RegisterPage: FC<RegisterPageProps> = ({
 }) => {
   return (
     <Layout title={title}>
-      <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl mx-auto">
+      <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md mx-auto">
         <div class="text-center mb-8">
           <h2 class="text-2xl font-bold text-gray-900">Create your account</h2>
           <p class="text-gray-600 mt-2">Join us today and get started</p>
